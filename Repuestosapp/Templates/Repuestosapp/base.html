@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>
+        {% block title %}{% endblock %}        
+    </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Repuestosapp/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<header>
+    <a href="/">KMOTORSHOP</a>
+</header>
+<body>
+<!-- Buscador genérico -->
+    <div class="contform">
+        <h1>Buscador de repuestos</h1>
+        <form action="" method="GET">
+            <!-- {% csrf_token %} -->
+            <div class="maintable">{{formulariop.as_table}}</div>
+            <button type="submit" value="enviar">Buscar</button>
+        </form>
+    </div>
+
+<form action="{% url 'find' %}" method="GET">
+<!-- <form action="" method="GET"> -->
+    <aside>
+<!-- {{filtrador}} -->
+    <label for="">Select vehicle:</label>
+    <!-- Vehiculos -->
+    <div class="sep">
+        <select name="car_id" id="car_id" required>
+            <option value="">Choose manufacturer...</option>
+            {% for only in onlyManufCars %}
+                <option value="{{only.car_manufacturer}}">{{only.car_manufacturer}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- Modelos -->
+    <div class="sep">
+        <!-- <label for="">Model:</label> -->
+        <select name="car_model_id" id="car_model_id" disabled required>
+            <option value="">Choose model...</option>
+            {% for all in allCars %}
+                <option value="{{all.car_model}}" data-carro="{{all.car_manufacturer}}">{{all.car_model}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- Motores -->
+    <div class="sep">
+        <!-- <label for="">Model:</label> -->
+        <select name="engine_id" id="engine_id" disabled required>
+            <option value="">Choose engine...</option>
+            {% for all in allEngines %}
+                <option value="{{all.engine_ide}}" data-carro="{{all.car_engine_info.car_model}}">{{all}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" value="filtrar">Buscar</button>
+    </aside>
+</form>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'Repuestosapp/script.js' %}"></script>
+</body>
+
+</html>

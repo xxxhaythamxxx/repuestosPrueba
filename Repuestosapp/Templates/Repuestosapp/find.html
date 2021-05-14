@@ -1,0 +1,30 @@
+{% extends "Repuestosapp/base.html" %}
+
+{% block title %} Spares {% endblock %}
+
+{% block content %}
+<div class="resultadoBusqueda">
+<!-- <p>{{brand_id}}</p> -->
+{% if spare %}
+<table>
+    <tr class="trsup">
+        <th>Code</th>
+        <th>Brand</th>
+        <th>Type</th>
+        <th>Car</th>
+    </tr>
+    {% for br in spare %}
+    <tr>
+        <th><a href="">{{br.spare_code}}</a></th>
+        <th><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></th>
+        <!-- <th><a name="brand_id" href="brand?brand_id">{{spares.spare_brand}}</a></th> -->
+        <th><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></th>
+        <th><a href="{% url 'manuf' br.car_info.car_manufacturer %}">{{br.car_info.car_manufacturer}}</a></th>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+</div>
+{% endblock %}
+
+
