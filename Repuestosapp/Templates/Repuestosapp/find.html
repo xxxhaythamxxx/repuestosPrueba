@@ -21,7 +21,7 @@
         <th><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></th>
         <!-- <th><a name="brand_id" href="brand?brand_id">{{spares.spare_brand}}</a></th> -->
         <th><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></th>
-        <th><a href="{% url 'manuf' br.car_info.car_manufacturer %}">{{br.car_info.car_manufacturer}}</a></th>
+        <th><a href="{% url 'name' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></th>
     </tr>
     {% endfor %}
 </table>

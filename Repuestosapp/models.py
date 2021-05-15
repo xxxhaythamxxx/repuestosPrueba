@@ -10,11 +10,10 @@ class car(models.Model):
     transmission=models.CharField(max_length=10)        #Ejemplo: ATM, MTM (Automatic, Manual)
 
     def __str__(self):
-        #return self.car_manufacturer
         return '%s %s, (%s / %s)' %(self.car_manufacturer, self.car_model, self.car_from.year, self.car_to.year)
 
 class engine(models.Model):
-    car_engine_info=models.ForeignKey(car, on_delete=models.CASCADE, default="Algo", related_name="AutoInfo")
+    car_engine_info=models.ManyToManyField(car)
     engine_l=models.CharField(max_length=6, verbose_name="Litre")             #Ejemplo: 1.8 D
     engine_ide=models.CharField(max_length=10, verbose_name="Code")          #Ejemplo: 1GRFE
     engine_type=models.CharField(max_length=10, verbose_name="Type")         #Ejemplo: Diesel, Petrol
@@ -22,15 +21,13 @@ class engine(models.Model):
     engine_pistons=models.IntegerField(verbose_name="Pistons")                #Ejemplo: 4 pistons
     engine_power_kw=models.IntegerField(verbose_name="Power (kW)")               #Ejemplo: 63 kw
     engine_power_hp=models.IntegerField(verbose_name="Power (hp)")               #Ejemplo: 85 hp
-    members=models.ManyToManyField(car, through='spare',)
 
     def __str__(self):
-        #return self.engine_ide
         return '%s %s %s %s ccm/%s pistons %s kW/%s hp' %(self.engine_l, self.engine_ide, self.engine_type, self.engine_cylinder, self.engine_pistons, self.engine_power_kw, self.engine_power_hp)
     
 class spare(models.Model):
-    car_info=models.ForeignKey(car, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Car model")
-    engine_info=models.ForeignKey(engine, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Engine")
+    car_info=models.ManyToManyField(car)
+    engine_info=models.ManyToManyField(engine)
     spare_photo=models.ImageField(upload_to="spares")         #Será ImageField()
     spare_code=models.CharField(max_length=15, verbose_name="Code")          #Ejemplo: 50013073
     spare_brand=models.CharField(max_length=15, verbose_name="Brand")         #Ejemplo: KOLBENSCMIDT

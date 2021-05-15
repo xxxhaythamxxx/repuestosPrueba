@@ -47,11 +47,14 @@
     </div>
     <!-- Motores -->
     <div class="sep">
+        
         <!-- <label for="">Model:</label> -->
         <select name="engine_id" id="engine_id" disabled required>
             <option value="">Choose engine...</option>
             {% for all in allEngines %}
-                <option value="{{all.engine_ide}}" data-carro="{{all.car_engine_info.car_model}}">{{all}}</option>
+                {% for p in all.car_engine_info.all %}
+                    <option value="{{all.engine_ide}}" data-carro="{{p.car_model}}">{{all}}</option>
+                {% endfor %}
             {% endfor %}
         </select>
     </div>
