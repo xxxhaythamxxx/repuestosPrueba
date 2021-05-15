@@ -31,7 +31,7 @@ class engine(models.Model):
 class spare(models.Model):
     car_info=models.ForeignKey(car, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Car model")
     engine_info=models.ForeignKey(engine, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Engine")
-    spare_photo=models.CharField(max_length=10)         #Será ImageField()
+    spare_photo=models.ImageField(upload_to="spares")         #Será ImageField()
     spare_code=models.CharField(max_length=15, verbose_name="Code")          #Ejemplo: 50013073
     spare_brand=models.CharField(max_length=15, verbose_name="Brand")         #Ejemplo: KOLBENSCMIDT
     spare_name=models.CharField(max_length=20, verbose_name="Name")          #Ejemplo: Oil filter

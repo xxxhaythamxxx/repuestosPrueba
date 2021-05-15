@@ -59,7 +59,7 @@ def brand(request,val):
             return render(request,"Repuestosapp/find.html",{"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines,"spare":comp})
         else:
             test=val
-            pr=spare.objects.values("spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_brand__icontains=test).distinct()
+            pr=spare.objects.values("spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_brand__icontains=test).distinct()
             return render(request,"Repuestosapp/brand.html",{"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
     
 
@@ -81,7 +81,7 @@ def name(request,val):
             return render(request,"Repuestosapp/find.html",{"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines,"spare":comp})
         else:
             test=val
-            pr=spare.objects.values("spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_name__icontains=test).distinct()
+            pr=spare.objects.values("spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_name__icontains=test).distinct()
             return render(request,"Repuestosapp/name.html",{"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
     
 def manuf(request,val):

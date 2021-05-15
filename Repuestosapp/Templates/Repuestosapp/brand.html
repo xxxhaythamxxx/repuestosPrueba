@@ -7,6 +7,7 @@
 <!-- <p>{{brand_id}}</p> -->
 <table>
     <tr class="trsup">
+        <th>Photo</th>
         <th>Code</th>
         <th>Brand</th>
         <th>Type</th>
@@ -14,6 +15,7 @@
     </tr>
     {% for br in brand_id %}
     <tr>
+        <th><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></th>
         <th><a href="">{{br.spare_code}}</a></th>
         <th><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></th>
         <th><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></th>

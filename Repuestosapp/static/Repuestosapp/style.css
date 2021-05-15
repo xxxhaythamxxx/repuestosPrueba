@@ -71,6 +71,15 @@ table, th, td {
 th, td {
     padding: 8px;
 }
+.photo {
+    /* background-color: red; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 80px;
+    height: 80px;
+    
+}
 .resultadoBusqueda {
     /* background-color: silver; */
     /* display: inline-block; */
