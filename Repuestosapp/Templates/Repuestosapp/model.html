@@ -7,7 +7,6 @@
 <!-- <p>{{brand_id}}</p> -->
 <table>
     <tr class="trsup">
-        <th>Car model</th>
         <th>Litres</th>
         <th>Engine model</th>
         <th>Type</th>
@@ -15,8 +14,7 @@
         <th>Pistons</th>
     </tr>
     {% for br in brand_id %}
-    <tr>
-        <th><a href="{% url 'manuf' br.car_engine_info.car_manufacturer %}">{{br.car_engine_info.car_manufacturer}}</a></th>
+    <tr>   
         <th><a href="">{{br.engine_l}}</a></th>
         <th><a href="{% url 'engine' br.engine_ide %}">{{br.engine_ide}}</a></th>
         <th><a href="">{{br.engine_type}}</a></th>

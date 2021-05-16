@@ -145,7 +145,7 @@ def enginei(request,val):
         else:    
             test=val
             pr=spare.objects.filter(engine_info__engine_ide__icontains=test)
-            return render(request,"Repuestosapp/engine.html",{"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
+            return render(request,"Repuestosapp/engine.html",{"test":test,"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
     
 
 
