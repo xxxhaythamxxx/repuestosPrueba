@@ -5,17 +5,19 @@
 {% block content %}
 <div class="resultadoBusqueda">
 <!-- <p>{{brand_id}}</p> -->
-<table>
-    <tr class="trsup">
-        <th>Manufacturer</th>
-        <th>Model</th>
-        <th>Transmission</th>
-    </tr>
+<table id="tmain">
+    <thead>
+        <tr class="trsup">
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Transmission</th>
+        </tr>
+    </thead>
     {% for br in brand_id %}
     <tr>
-        <th><a href="{% url 'manuf' br.car_manufacturer %}">{{br.car_manufacturer}}</a></th>
-        <th><a href="{% url 'model' br.car_model %}">{{br.car_model}}</a></th>
-        <th><a href="">{{br.transmission}}</a></th>
+        <td><a href="{% url 'manuf' br.car_manufacturer %}">{{br.car_manufacturer}}</a></td>
+        <td><a href="{% url 'model' br.car_model %}">{{br.car_model}}</a></td>
+        <td><a href="">{{br.transmission}}</a></td>
     </tr>
     {% endfor %}
 </table>

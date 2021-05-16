@@ -3,27 +3,31 @@
 {% block title %} KMOTORSHOP{% endblock %}
 
 {% block content %}
+
 <div class="resultadoBusqueda">
 <!-- <p>{{brand_id}}</p> -->
 {% if spare %}
-<table>
-    <tr class="trsup">
-        <th>Photo</th>
-        <th>Code</th>
-        <th>Brand</th>
-        <th>Type</th>
-        <th>Car</th>
-    </tr>
+<table class="" id="tmain">
+    <thead>
+        <tr class="trsup">
+            <th>Photo</th>
+            <th>Code</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Car</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for br in spare %}
     <tr>
-        <th><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></th>
-        <th><a href="">{{br.spare_code}}</a></th>
-        <th><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></th>
-        <!-- <th><a name="brand_id" href="brand?brand_id">{{spares.spare_brand}}</a></th> -->
-        <th><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></th>
-        <th><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></th>
+        <td><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
+        <td><a href="">{{br.spare_code}}</a></td>
+        <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
+        <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
+        <td><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
 {% endif %}
 </div>

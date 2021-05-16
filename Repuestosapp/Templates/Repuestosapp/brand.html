@@ -5,23 +5,27 @@
 {% block content %}
 <div class="resultadoBusqueda">
 <!-- <p>{{brand_id}}</p> -->
-<table>
-    <tr class="trsup">
-        <th>Photo</th>
-        <th>Code</th>
-        <th>Brand</th>
-        <th>Type</th>
-        <th>Car</th>
-    </tr>
+{% if brand_id %}
+<table class="" id="tmain">
+    <thead>
+        <tr class="trsup">
+            <th>Photo</th>
+            <th>Code</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Car</th>
+        </tr>
+    </thead>
     {% for br in brand_id %}
     <tr>
-        <th><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></th>
-        <th><a href="">{{br.spare_code}}</a></th>
-        <th><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></th>
-        <th><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></th>
-        <th><a href="{% url 'manuf' br.car_info__car_manufacturer %}">{{br.car_info__car_manufacturer}}</a></th>
+        <td><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
+        <td><a href="">{{br.spare_code}}</a></td>
+        <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
+        <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
+        <td><a href="{% url 'manuf' br.car_info__car_manufacturer %}">{{br.car_info__car_manufacturer}}</a></td>
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 </div>
 {% endblock %}

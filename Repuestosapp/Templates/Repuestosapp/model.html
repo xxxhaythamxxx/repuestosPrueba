@@ -5,21 +5,23 @@
 {% block content %}
 <div class="resultadoBusqueda">
 <!-- <p>{{brand_id}}</p> -->
-<table>
-    <tr class="trsup">
-        <th>Litres</th>
-        <th>Engine model</th>
-        <th>Type</th>
-        <th>Cylinder</th>
-        <th>Pistons</th>
-    </tr>
+<table id="tmain">
+    <thead>
+        <tr class="trsup">
+            <th>Litres</th>
+            <th>Engine model</th>
+            <th>Type</th>
+            <th>Cylinder</th>
+            <th>Pistons</th>
+        </tr>
+    </thead>
     {% for br in brand_id %}
     <tr>   
-        <th><a href="">{{br.engine_l}}</a></th>
-        <th><a href="{% url 'engine' br.engine_ide %}">{{br.engine_ide}}</a></th>
-        <th><a href="">{{br.engine_type}}</a></th>
-        <th><a href="">{{br.engine_cylinder}}</a></th>
-        <th><a href="">{{br.engine_pistons}}</a></th>
+        <td><a href="">{{br.engine_l}}</a></td>
+        <td><a href="{% url 'engine' br.engine_ide %}">{{br.engine_ide}}</a></td>
+        <td><a href="">{{br.engine_type}}</a></td>
+        <td><a href="">{{br.engine_cylinder}}</a></td>
+        <td><a href="">{{br.engine_pistons}}</a></td>
     </tr>
     {% endfor %}
 </table>

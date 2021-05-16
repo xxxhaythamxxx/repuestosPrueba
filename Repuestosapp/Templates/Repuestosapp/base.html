@@ -6,6 +6,9 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'Repuestosapp/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/>
 </head>
 <header>
     <a href="/">KMOTORSHOP</a>
@@ -64,6 +67,33 @@
     {% block content %}
     {% endblock %}
     <script src="{% static 'Repuestosapp/script.js' %}"></script>
+    
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#tmain').DataTable({
+                dom:'Bfrtilp',
+                buttons:[
+                    'pdf',
+                    'excel',
+                    'print',
+                    // {
+                    //     extend: 'pdfHtml5',
+                    //     className: 'pdfButton'
+                    // },
+                ],
+                // "bPaginate": false,
+                "bLengthChange": false,
+                // "bFilter": true,
+                // "bInfo": false,
+                // "bAutoWidth": false
+
+            });
+        } );
+    </script>
 </body>
 
 </html>
