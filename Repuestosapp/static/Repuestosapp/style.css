@@ -146,4 +146,35 @@ select {
     border-radius: 20px;
 }
 
-/* Resultados */
+/* Spare Details */
+.imagecont {
+    width: 30%;
+}
+.mimage {
+    height: 220px;
+    width: 220px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    float: left;
+}
+.sparedetcont {
+    /* display: inline-block; */
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+.sparedetcont h3 {
+    color: white;
+    text-align: center;
+    padding: 5px;
+    background: rgb(136,12,12);
+    background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
+}
+.mdescrp {
+    margin: auto;
+    /* float: left; */
+}
+.mdescrp table {
+    width: 70%;
+}

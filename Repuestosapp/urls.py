@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Repuestosapp import views
+from . import views
 
 urlpatterns = [
     path('', views.home,name='home'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('manuf/<str:val>',views.manuf,name='manuf'),
     path('model/<str:val>',views.model,name='model'),
     path('engine/<str:val>',views.enginei,name='engine'),
+    path('sparedetails/<str:val>',views.sparedetails,name='sparedetails'),
     # path('', views.base,name='base'),
 ]
 

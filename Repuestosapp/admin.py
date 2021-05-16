@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Repuestosapp.models import *
+from .models import *
 # Register your models here.
 
 class carAdmin(admin.ModelAdmin):

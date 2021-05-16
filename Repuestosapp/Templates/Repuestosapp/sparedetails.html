@@ -1,0 +1,30 @@
+{% extends "Repuestosapp/base.html" %}
+
+{% block title %} Sparedetail {% endblock %}
+
+{% block content %}
+<div class="resultadoBusqueda">
+    <div class="sparedetcont">
+        <div class="imagecont">
+            <div style="background-image: url('/media/{{brand_id.0.spare_photo}}');"" class="mimage"></div>
+        </div>
+        <div class="mdescrp">
+            <h3>{{brand_id.0.spare_name}} - {{brand_id.0.spare_brand}}</h3>
+            <table>
+                <tr class="trsup">
+                    <th>Code</th>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Car</th>
+                </tr>
+                <tr>
+                    <th><a href="">{{brand_id.0.spare_code}}</a></th>
+                    <th><a href="{% url 'brand' brand_id.0.spare_brand %}">{{brand_id.0.spare_brand}}</a></th>
+                    <th><a href="{% url 'name' brand_id.0.spare_name %}">{{brand_id.0.spare_name}}</a></th>
+                    <th><a href="{% url 'manuf' brand_id.0.car_info.all.0.car_manufacturer %}">{{brand_id.0.car_info.all.0.car_manufacturer}}</a></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

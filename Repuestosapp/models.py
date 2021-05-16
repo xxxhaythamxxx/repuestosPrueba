@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class car(models.Model):
     car_manufacturer=models.CharField(max_length=20, verbose_name="Manufacturer")    #Ejemplo: Audi
-    car_model=models.CharField(max_length=30, verbose_name="Model")           #Ejemplo: 100 C1 Coupe (817)
+    car_model=models.CharField(max_length=30, verbose_name="Model", unique=True)           #Ejemplo: 100 C1 Coupe (817)
     VIN=models.CharField(max_length=18, blank=True)
     car_from=models.DateField(verbose_name="From")      #Ejemplo: 11/2015
     car_to=models.DateField(verbose_name="To")          #Ejemplo: 11/2018
@@ -29,7 +29,7 @@ class spare(models.Model):
     car_info=models.ManyToManyField(car)
     engine_info=models.ManyToManyField(engine)
     spare_photo=models.ImageField(upload_to="spares")         #Será ImageField()
-    spare_code=models.CharField(max_length=15, verbose_name="Code")          #Ejemplo: 50013073
+    spare_code=models.CharField(max_length=15, verbose_name="Code", unique=True)          #Ejemplo: 50013073
     spare_brand=models.CharField(max_length=15, verbose_name="Brand")         #Ejemplo: KOLBENSCMIDT
     spare_name=models.CharField(max_length=20, verbose_name="Name")          #Ejemplo: Oil filter
 

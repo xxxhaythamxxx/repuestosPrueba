@@ -1,6 +1,6 @@
 {% extends "Repuestosapp/base.html" %}
 
-{% block title %} Spares {% endblock %}
+{% block title %} Tyoe {% endblock %}
 
 {% block content %}
 <div class="resultadoBusqueda">
@@ -17,8 +17,8 @@
     </thead>
     {% for br in brand_id %}
     <tr>
-        <td><a href=""><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
-        <td><a href="">{{br.spare_code}}</a></td>
+        <td><a href="{% url 'sparedetails' br.spare_code %}"><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
+        <td><a href="{% url 'sparedetails' br.spare_code %}">{{br.spare_code}}</a></td>
         <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
         <!-- <th><a name="brand_id" href="brand?brand_id">{{spares.spare_brand}}</a></th> -->
         <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>

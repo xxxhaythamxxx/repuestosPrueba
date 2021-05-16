@@ -147,8 +147,27 @@ def enginei(request,val):
             pr=spare.objects.filter(engine_info__engine_ide__icontains=test)
             return render(request,"Repuestosapp/engine.html",{"test":test,"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
     
+def sparedetails(request,val):
 
-
+    formulario_busqueda=Formulario()
+    allEngines=engine.objects.all()# Consigo TODOS los motores
+    onlyManufCars=car.objects.all().values("car_manufacturer").distinct()# Conseguir TODOS los carros por fabricante
+    allCars=car.objects.all()# Conseguir TODOS los carros
+    comp=spare.objects.none()
+    if request.GET.get("engine_id"):    # Si usaron el filter
+            engModel=request.GET.get("engine_id")   # Valor del modelo del motor
+            comp=spare.objects.filter(engine_info__engine_ide__icontains=engModel)  # Creo un Query de spare que tenga el valor del motor pasado
+            return render(request,"Repuestosapp/find.html",{"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines,"spare":comp})
+    else:   # Si se usa el buscador por código de repuesto
+        if request.GET.get("search"):
+            valor=request.GET.get("search")
+            comp=spare.objects.filter(spare_code__icontains=valor) # Compara el codigoRepuesto con valor
+            return render(request,"Repuestosapp/find.html",{"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines,"spare":comp})
+        else:    
+            test=val
+            pr=spare.objects.filter(spare_code__icontains=test)
+            return render(request,"Repuestosapp/sparedetails.html",{"test":test,"brand_id":pr,"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines})
+    
 
 
 
