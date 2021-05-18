@@ -73,13 +73,12 @@ th, td {
     padding: 8px;
 }
 .photo {
-    /* background-color: red; */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     width: 80px;
     height: 80px;
-    
+    margin: auto;
 }
 .resultadoBusqueda {
     /* background-color: blue; */
@@ -149,6 +148,7 @@ select {
 /* Spare Details */
 .imagecont {
     width: 30%;
+    margin-top: 20px;
 }
 .mimage {
     height: 220px;
@@ -160,14 +160,14 @@ select {
 }
 .sparedetcont {
     /* display: inline-block; */
-    padding: 10px;
+    padding: 0 10px;
     margin-top: 20px;
     text-align: center;
 }
 .sparedetcont h3 {
     color: white;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
     background: rgb(136,12,12);
     background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
 }
