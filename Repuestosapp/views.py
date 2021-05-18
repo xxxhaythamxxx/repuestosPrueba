@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .forms import Formulario, listCars
 from .models import car, spare, engine
+from django.core.paginator import Paginator
 
 def same():
     formulario_busqueda=Formulario()
@@ -30,6 +31,15 @@ def selectf(request):
             return render(request,"Repuestosapp/find.html",dic)
         else:
             return False
+
+def prueba(request):
+    all=car.objects.all().order_by("id")
+    paginator = Paginator(all, 2) # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    all = paginator.get_page(page_number)
+    return render(request,"Repuestosapp/prueba.html",{"all":all})
+
 
 def home(request):
 
