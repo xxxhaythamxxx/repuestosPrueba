@@ -7,19 +7,35 @@
 </header>
 <body>
 <div class="resultadoBusqueda">
-    {{all}}
     {% if all %}
+    <div class="pagination">
+        {% if all.has_previous %}
+            <a href="?page=1"><<</a>
+            <a href="?page={{all.previous_page_number}}"><</a>
+        {% endif %}
+        {% for num in all.paginator.page_range %}
+            {% if all.number == num %}
+                <strong>{{num}}</strong>
+            {% elif num > all.number|add:"-3" and num < all.number|add:"3" %}
+                {{num}}
+            {% endif %}
+        {% endfor %}
+        {% if all.has_next %}
+            <a href="?page={{all.next_page_number}}">></a>
+            <a href="?page={{all.paginator.num_pages}}">>></a>
+        {% endif %}
+    </div>
     <table class="" id="tmain">
         <thead>
             <tr class="trsup">
-                <th>Manuf</th>
-                <th>Model</th>
+                <th>Code</th>
+                <th>Brand</th>
             </tr>
         </thead>
         {% for br in all %}
         <tr>
-            <td><a href="">{{br.car_manufacturer}}</a></td>
-            <td><a href="">{{br.car_model}}</a></td>
+            <td><a href="">{{br.spare_code}}</a></td>
+            <td><a href="">{{br.spare_brand}}</a></td>
         </tr>
         {% endfor %}
     </table>

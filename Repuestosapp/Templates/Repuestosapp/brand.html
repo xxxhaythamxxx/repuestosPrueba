@@ -3,17 +3,20 @@
 {% block title %} Brand {% endblock %}
 
 {% block content %}
+{% load Repuestosapp_extras %}
 <div class="resultadoBusqueda">
+<div class="migajas">Spare brand: {{mig}} </div>
 <!-- <p>{{brand_id}}</p> -->
 {% if brand_id %}
+<input class="filter" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter">    
 <table class="" id="tmain">
     <thead>
         <tr class="trsup">
-            <th>Photo</th>
-            <th>Code</th>
-            <th>Brand</th>
-            <th>Type</th>
-            <th>Car</th>
+            <td>Photo</td>
+            <td>Code</td>
+            <td>Brand</td>
+            <td>Type</td>
+            <td>Car</td>
         </tr>
     </thead>
     {% for br in brand_id %}
@@ -26,6 +29,31 @@
     </tr>
     {% endfor %}
 </table>
+{% if brand_id.paginator.count > 10 %}
+<div class="pagination">
+    {% if brand_id.has_previous %}
+        <a href="{% my_url 1 'page' request.GET.urlencode %}"><<</a>
+        <a href="{% my_url brand_id.previous_page_number 'page' request.GET.urlencode %}"><</a>
+    {% else %}
+        <a class="disabled" href="#"><<</a>
+        <a class="disabled" href="#"><</a>
+    {% endif %}
+    {% for num in brand_id.paginator.page_range %}
+        {% if brand_id.number == num %}
+            <a class="numpag pactual" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
+        {% elif num > brand_id.number|add:"-3" and num < brand_id.number|add:"3" %}
+            <a class="numpag" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
+        {% endif %}
+    {% endfor %}
+    {% if brand_id.has_next %}
+        <a href="{% my_url brand_id.next_page_number 'page' request.GET.urlencode %}">></a>
+        <a href="{% my_url brand_id.paginator.num_pages 'page' request.GET.urlencode %}">>></a>
+    {% else %}
+        <a class="disabled" href="#">></a>
+        <a class="disabled" href="#">>></a>
+    {% endif %}
+</div>
+{% endif %}
 {% endif %}
 </div>
 {% endblock %}

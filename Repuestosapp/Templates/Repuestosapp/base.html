@@ -64,9 +64,13 @@
     <button type="submit" value="filtrar">Buscar</button>
     </aside>
 </form>
+
+    {% load Repuestosapp_extras %}
     {% block content %}
     {% endblock %}
     <script src="{% static 'Repuestosapp/script.js' %}"></script>
+    <!-- Para que trabaje el paginado -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     
     <!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
