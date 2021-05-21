@@ -1,45 +1,36 @@
-<html>
-<head>
-    <title>Hola</title>
-</head>
-<header>
+{% extends "Repuestosapp/base.html" %}
 
-</header>
-<body>
-<div class="resultadoBusqueda">
-    {% if all %}
-    <div class="pagination">
-        {% if all.has_previous %}
-            <a href="?page=1"><<</a>
-            <a href="?page={{all.previous_page_number}}"><</a>
-        {% endif %}
-        {% for num in all.paginator.page_range %}
-            {% if all.number == num %}
-                <strong>{{num}}</strong>
-            {% elif num > all.number|add:"-3" and num < all.number|add:"3" %}
-                {{num}}
-            {% endif %}
-        {% endfor %}
-        {% if all.has_next %}
-            <a href="?page={{all.next_page_number}}">></a>
-            <a href="?page={{all.paginator.num_pages}}">>></a>
-        {% endif %}
-    </div>
-    <table class="" id="tmain">
-        <thead>
-            <tr class="trsup">
-                <th>Code</th>
-                <th>Brand</th>
-            </tr>
-        </thead>
-        {% for br in all %}
-        <tr>
-            <td><a href="">{{br.spare_code}}</a></td>
-            <td><a href="">{{br.spare_brand}}</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+{% block title %} Model {% endblock %}
+
+{% block content %}
+<div id="invoice" class="resultadoBusqueda">
+
+    <p>Hola</p>{{name}}
+
+    <button onClick="generatePDF()">Download</button>
+
+
+    <!-- <form target="_blank" action="">
+        <button value="view" name="view"  type="submit">View Invoice</button>
+    </form>
+    <form action="">
+        <button value="print" name="print" type="submit">Download Invoice</button>
+    </form> -->
+
+
+    <!-- <a name="view" rel="noopener noreferrer" target="_blank" href="">View Invoice</a>
+    <a name="print" href="">Download Invoice</a> -->
+
+
+    <!-- <form method="get" action="">
+        {{ all.form.as_p }}
+        <input type="submit" value="Press">
+    </form>
+    {% for n in all.qs %}
+        <p>Code: {{n.spare_code}}</p>
+        <p>Brand: {{n.spare_brand}}</p>
+        <p>Name: {{n.spare_name}}</p>
+    {% endfor %} -->
+
 </div>
-</body>
-</html>
+{% endblock %}

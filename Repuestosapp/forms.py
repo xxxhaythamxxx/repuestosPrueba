@@ -3,7 +3,7 @@ from .models import car, spare, engine
 from django.forms import ModelForm
 
 class Formulario(forms.Form):
-    search=forms.CharField(label="", required=False,widget=forms.TextInput(attrs={"placeholder":"Ingrese búsqueda por código de repuesto..."}))
+    search=forms.CharField(label="", required=False,widget=forms.TextInput(attrs={"placeholder":"Search for spare part code..."}))
 
 # class sideFilter(forms.Form):
 #     select=forms.ModelChoiceField(queryset=car.objects.all(),

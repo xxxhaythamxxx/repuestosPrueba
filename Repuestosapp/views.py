@@ -2,6 +2,16 @@ from django.shortcuts import render, HttpResponse
 from .forms import Formulario, listCars
 from .models import car, spare, engine
 from django.core.paginator import Paginator
+from .filters import spareFilter
+from io import BytesIO
+from django.http import HttpResponse
+from django.views import View
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from weasyprint import HTML, CSS
+import os
+from django.conf import settings
+from django.contrib.staticfiles import finders
 
 def same(): # Creo el diccionario para los formularios en común de todos los templates
     formulario_busqueda=Formulario()
@@ -23,36 +33,49 @@ def pag(request,obj,num,htmlid,att,v):    # Creo la paginación de todas las pla
 
 
 def selectf(request):   # Código para saber si usa el input o el filtro
-    search=request.GET.get("engine_id")
-    if search:    # Si usaron el filter
-        engModel=request.GET.get("engine_id")       # Valor del modelo del motor
-        carManu=request.GET.get("car_id")           # Valor del carro enviado
-        carModel=request.GET.get("car_model_id")    #Valor del modelo del carro enviado
-        comp=spare.objects.filter(engine_info__engine_ide__icontains=engModel,car_info__car_manufacturer__icontains=carManu,car_info__car_model__icontains=carModel).order_by("id")  # Creo un Query de spare que tenga el valor del motor pasado
-        return render(request,"Repuestosapp/findfil.html",pag(request,comp,10,"spare","mig",engModel))
-    else:   # Si se usa el buscador por código de repuesto
-        valor=request.GET.get("search")
-        if valor:
-            comp=spare.objects.filter(spare_code__icontains=valor).order_by("id") # Compara el codigoRepuesto con valor
-            return render(request,"Repuestosapp/find.html",pag(request,comp,10,"spare","mig",valor))
-        else:
-            return False
+    if request.method=="GET":
+        print("Entra al selectf")
+        search=request.GET.get("engine_id")
+        print(search)
+        if search:    # Si usaron el filter
+            print("Consigue engine_id")
+            engModel=request.GET.get("engine_id")       # Valor del modelo del motor
+            carManu=request.GET.get("car_id")           # Valor del carro enviado
+            carModel=request.GET.get("car_model_id")    #Valor del modelo del carro enviado
+            comp=spare.objects.filter(engine_info__engine_ide__icontains=engModel,car_info__car_manufacturer__icontains=carManu,car_info__car_model__icontains=carModel).order_by("id")  # Creo un Query de spare que tenga el valor del motor pasado
+            return render(request,"Repuestosapp/findfil.html",pag(request,comp,10,"spare","mig",engModel))
+        else:   # Si se usa el buscador por código de repuesto
+            valor=request.GET.get("search")
+            if valor:
+                comp=spare.objects.filter(spare_code__icontains=valor).order_by("id") # Compara el codigoRepuesto con valor
+                return render(request,"Repuestosapp/find.html",pag(request,comp,10,"spare","mig",valor))
+            else:
+                return False
 
 def prueba(request):
-    all=spare.objects.all().order_by("id")
-    paginator = Paginator(all, 2) # Show 25 contacts per page.
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    all = paginator.get_page(page_number)
-    return render(request,"Repuestosapp/prueba.html",{"all":all})
-
+    return render(request,"Repuestosapp/prueba.html",{"name":"LuisPapito"})
+    # name=request.GET.get("view")
+    # print=request.GET.get("print")
+    # if name:
+    #     return verPDF(request,"Repuestosapp/prueba.html",{"name":"SuperLuis"})
+    # else:
+    #     if print:
+    #         return imprimirPDF(request,"Repuestosapp/prueba.html",{"name":"SuperLuis"})
+    #     else:
+    #         return render(request,"Repuestosapp/prueba.html")
+    # comp=spare.objects.all().order_by("id")
+    # filter=spareFilter(request.GET,queryset=comp)
+    
 
 def home(request):
 
-    if selectf(request)==False:
-        return render(request,"Repuestosapp/home.html",same())
-    else:
-        return selectf(request)
+    if request.method=="GET":
+        print("Entra a home")
+
+        if selectf(request)==False:
+            return render(request,"Repuestosapp/home.html",same())
+        else:
+            return selectf(request)
 
 def find(request):
     print("Entra a find")

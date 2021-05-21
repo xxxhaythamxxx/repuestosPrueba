@@ -7,16 +7,14 @@
     <link rel="stylesheet" href="{% static 'Repuestosapp/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.css"/> -->
 </head>
 <header>
-    <a href="/">KMOTORSHOP</a>
+    <a href="/">KMOTORSHOP.COM</a>
 </header>
 <body>
 <!-- Buscador genérico -->
     <div class="contform">
-        <h1>Buscador de repuestos</h1>
+        <h1>Spare parts finder</h1>
         <form action="" method="GET">
             <!-- {% csrf_token %} -->
             <div class="maintable">{{formulariop.as_table}}</div>
@@ -24,9 +22,9 @@
         </form>
     </div>
 
-<form action="" method="GET">
+<aside>
 <!-- <form action="" method="GET"> -->
-    <aside>
+    <form action="" method="GET">
 <!-- {{filtrador}} -->
     <label for="">Select vehicle:</label>
     <!-- Vehiculos -->
@@ -62,42 +60,21 @@
         </select>
     </div>
     <button type="submit" value="filtrar">Buscar</button>
-    </aside>
-</form>
-
+    </form>    
+</aside>
+<button onClick="viewPDF()">Download</button>
     {% load Repuestosapp_extras %}
     {% block content %}
     {% endblock %}
     <script src="{% static 'Repuestosapp/script.js' %}"></script>
     <!-- Para que trabaje el paginado -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    
-    <!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.24/b-1.7.0/b-html5-1.7.0/b-print-1.7.0/datatables.min.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#tmain').DataTable({
-                dom:'Bfrtilp',
-                buttons:[
-                    'pdf',
-                    'excel',
-                    'print',
-                    // {
-                    //     extend: 'pdfHtml5',
-                    //     className: 'pdfButton'
-                    // },
-                ],
-                // "bPaginate": false,
-                "bLengthChange": false,
-                // "bFilter": true,
-                // "bInfo": false,
-                // "bAutoWidth": false
 
-            });
-        } );
-    </script> -->
+    <!-- Para generar PDF con js -->
+    <script src="html2pdf.bundle.min.js"></script>
+    <script src='https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js'></script>
+
+
 </body>
 
 </html>

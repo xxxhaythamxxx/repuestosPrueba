@@ -158,3 +158,41 @@ $(document).ready(function(){
   $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
     
 });
+
+// Generar PDF desde HTML
+function generatePDF(){
+    const element = document.getElementById("invoice");
+    var opt = {
+        margin:       1,
+        filename:     'report.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        enableLinks:  false,
+        pagebreak:    {mode: "avoid-all"},
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+    html2pdf()
+    .set(opt)
+    .from(element)
+    .save();
+}
+
+function viewPDF(){
+    const element = document.getElementById("invoice");
+    var opt = {
+        margin:       1,
+        filename:     'report.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        enableLinks:  false,
+        pagebreak:    {mode: "avoid-all"},
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+    html2pdf()
+    .set(opt)
+    .from(element);
+    
+    html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
+        window.open(pdf.output('bloburl'), '_blank');
+      });
+}

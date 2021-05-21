@@ -3,15 +3,13 @@
 {% block title %} KMOTORSHOP{% endblock %}
 
 {% block content %}
-
 {% load Repuestosapp_extras %}
 
 {% if spare %}
-
 <div class="resultadoBusqueda">
 <div class="migajas">Spare code: {{mig}} </div>
 <input class="filter" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter">    
-<table class="" id="tmain">
+<table id="invoice" class="" id="tmain">
     <thead>
         <tr class="trsup">
             <td>Photo</td>
@@ -60,7 +58,6 @@
 {% endif %}
 {% endif %}
 </div>
-
 {% endblock %}
 
 
