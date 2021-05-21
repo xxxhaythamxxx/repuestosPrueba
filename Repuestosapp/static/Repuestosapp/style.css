@@ -1,10 +1,10 @@
-/* Todos */
+/* Todos ---------------------------------------------------------------------------- */
 * {
     margin:0;
     padding:0;
 }
 
-/* Cabecera */
+/* Cabecera ----------------------------------------------------------------------------*/
 header {
     /* background-color:rgb(196, 18, 18); */
 
@@ -39,7 +39,7 @@ body {
     margin: 10px 0 auto;
 }
 
-/* Buscador */
+/* Buscador ----------------------------------------------------------------------------*/
 .contform {
     /* background-color: darkgreen; */
     background-image: url("/static/Repuestosapp/img/portada.jpg");
@@ -67,7 +67,7 @@ button {
     border-radius: 5px;
 }
 
-/* Tabla de resultados */
+/* Tabla de resultados ----------------------------------------------------------------------------*/
 .trsup {
     /* background-color: #c41212; */
     background: rgb(136,12,12);
@@ -116,17 +116,21 @@ th, td {
     text-decoration: none;
 }
 
-/* Filtrador */
-aside {
+/* Filtrador ----------------------------------------------------------------------------*/
+.lateral {
+    width: 20%;
+    float: left;
+}
+aside, .filterExtra {
     background: rgb(136,12,12);
     background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
     float: left;
-    width: 20%;
+    /* width: 20%; */
     text-align: center;
     margin-top: 10px;
     border-radius: 5px;
 }
-aside label {
+aside label, .filterExtra label {
     color:white;
     font-weight: bold;
     margin: 10px 20px auto;
@@ -144,8 +148,14 @@ select {
     padding: 5px;
     border-radius: 20px;
 }
+.PDFoptions {
+    margin:10px 0;
+}
+.filterExtra {
+    width: 100%;
+}
 
-/* Spare Details */
+/* Spare Details ----------------------------------------------------------------------------*/
 .imagecont {
     width: 30%;
     margin-top: 20px;
@@ -179,7 +189,7 @@ select {
     width: 70%;
 }
 
-/* Paginacion */
+/* Paginacion ----------------------------------------------------------------------------*/
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -219,7 +229,7 @@ a.pactual {
     cursor: not-allowed;
 }
 
-/* filtro */
+/* filtro ----------------------------------------------------------------------------*/
 .filter {
     padding: 5px;
     margin: 10px auto;

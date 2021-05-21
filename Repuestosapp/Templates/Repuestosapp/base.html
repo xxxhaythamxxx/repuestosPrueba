@@ -22,6 +22,7 @@
         </form>
     </div>
 
+<div class="lateral">
 <aside>
 <!-- <form action="" method="GET"> -->
     <form action="" method="GET">
@@ -60,9 +61,20 @@
         </select>
     </div>
     <button type="submit" value="filtrar">Buscar</button>
-    </form>    
+    </form>       
 </aside>
-<button onClick="viewPDF()">Download</button>
+
+{% if spare or brand_id %}
+<div class="filterExtra">
+<label for="">Table options:</label>
+    <div class="PDFoptions">
+        <button onClick="viewPDF()">Preview</button>
+        <button onClick="generatePDF()">Download</button>
+    </div> 
+</div>
+{% endif %}
+
+</div>
     {% load Repuestosapp_extras %}
     {% block content %}
     {% endblock %}
