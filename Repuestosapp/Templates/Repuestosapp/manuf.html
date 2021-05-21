@@ -24,31 +24,6 @@
     </tr>
     {% endfor %}
 </table>
-{% if brand_id.paginator.count > 10 %}
-<div class="pagination">
-    {% if brand_id.has_previous %}
-        <a href="{% my_url 1 'page' request.GET.urlencode %}"><<</a>
-        <a href="{% my_url brand_id.previous_page_number 'page' request.GET.urlencode %}"><</a>
-    {% else %}
-        <a class="disabled" href="#"><<</a>
-        <a class="disabled" href="#"><</a>
-    {% endif %}
-    {% for num in brand_id.paginator.page_range %}
-        {% if brand_id.number == num %}
-            <a class="numpag pactual" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
-        {% elif num > brand_id.number|add:"-3" and num < brand_id.number|add:"3" %}
-            <a class="numpag" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
-        {% endif %}
-    {% endfor %}
-    {% if brand_id.has_next %}
-        <a href="{% my_url brand_id.next_page_number 'page' request.GET.urlencode %}">></a>
-        <a href="{% my_url brand_id.paginator.num_pages 'page' request.GET.urlencode %}">>></a>
-    {% else %}
-        <a class="disabled" href="#">></a>
-        <a class="disabled" href="#">>></a>
-    {% endif %}
-</div>
-{% endif %}
 </div>
 {% endblock %}
 

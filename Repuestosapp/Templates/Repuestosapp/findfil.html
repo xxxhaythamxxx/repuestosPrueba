@@ -34,31 +34,6 @@
     {% endfor %}
     </tbody>
 </table>
-{% if spare.paginator.count > 10 %}
-<div class="pagination">
-    {% if spare.has_previous %}
-        <a href="{% my_url 1 'page' request.GET.urlencode %}"><<</a>
-        <a href="{% my_url spare.previous_page_number 'page' request.GET.urlencode %}"><</a>
-    {% else %}
-        <a class="disabled" href="#"><<</a>
-        <a class="disabled" href="#"><</a>
-    {% endif %}
-    {% for num in spare.paginator.page_range %}
-        {% if spare.number == num %}
-            <a class="numpag pactual" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
-        {% elif num > spare.number|add:"-3" and num < spare.number|add:"3" %}
-            <a class="numpag" href="{% my_url num 'page' request.GET.urlencode %}">{{num}}</a>
-        {% endif %}
-    {% endfor %}
-    {% if spare.has_next %}
-        <a href="{% my_url spare.next_page_number 'page' request.GET.urlencode %}">></a>
-        <a href="{% my_url spare.paginator.num_pages 'page' request.GET.urlencode %}">>></a>
-    {% else %}
-        <a class="disabled" href="#">></a>
-        <a class="disabled" href="#">>></a>
-    {% endif %}
-</div>
-{% endif %}
 {% endif %}
 </div>
 {% endblock %}
