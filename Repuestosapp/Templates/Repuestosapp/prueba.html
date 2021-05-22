@@ -1,36 +1,36 @@
-{% extends "Repuestosapp/base.html" %}
+{% load static %}
+<html>
+<header>
+    <title>Hola</title>
+    <!-- <link rel="stylesheet" href="{% static 'Repuestosapp/style.css' %}"> -->
+</header>
+<body>
 
-{% block title %} Model {% endblock %}
-
-{% block content %}
 <div id="invoice" class="resultadoBusqueda">
-
-    <p>Hola</p>{{name}}
-
-    <button onClick="generatePDF()">Download</button>
-
-
-    <!-- <form target="_blank" action="">
-        <button value="view" name="view"  type="submit">View Invoice</button>
-    </form>
-    <form action="">
-        <button value="print" name="print" type="submit">Download Invoice</button>
-    </form> -->
-
-
-    <!-- <a name="view" rel="noopener noreferrer" target="_blank" href="">View Invoice</a>
-    <a name="print" href="">Download Invoice</a> -->
-
-
-    <!-- <form method="get" action="">
-        {{ all.form.as_p }}
-        <input type="submit" value="Press">
-    </form>
-    {% for n in all.qs %}
-        <p>Code: {{n.spare_code}}</p>
-        <p>Brand: {{n.spare_brand}}</p>
-        <p>Name: {{n.spare_name}}</p>
-    {% endfor %} -->
-
+    <table id="example" class="example">
+        <thead>
+            <tr class="trsup">
+                <th>Code</th>
+                <th>Brand</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="crypto-table-body">
+        {% for br in spare %}
+        <tr>
+            <td><a href="#">{{br.spare_code}}</a></td>
+            <td><a href="#">{{br.spare_brand}}</a></td>
+            <td><a href="#">{{br.spare_name}}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% endblock %}
+
+<script src="{% static 'Repuestosapp/script.js' %}"></script>
+
+
+
+
+</body>
+</html>

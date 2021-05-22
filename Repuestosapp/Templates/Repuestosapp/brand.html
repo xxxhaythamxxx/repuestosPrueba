@@ -8,7 +8,7 @@
 <div class="migajas">Spare brand: {{mig}} </div>
 <!-- <p>{{brand_id}}</p> -->
 {% if brand_id %}
-<input class="filter" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter">    
+<input class="filter" type="text" id="myInput" placeholder="Filter">        
 <table class="" id="invoice">
     <thead>
         <tr class="trsup">
@@ -19,6 +19,7 @@
             <td>Car</td>
         </tr>
     </thead>
+    <tbody id="myTable">
     {% for br in brand_id %}
     <tr>
         <td><a href="{% url 'sparedetails' br.spare_code %}"><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
@@ -28,6 +29,7 @@
         <td><a href="{% url 'manuf' br.car_info__car_manufacturer %}">{{br.car_info__car_manufacturer}}</a></td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
 {% endif %}
 </div>

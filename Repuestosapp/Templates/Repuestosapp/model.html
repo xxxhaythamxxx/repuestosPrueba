@@ -7,7 +7,7 @@
 <div class="resultadoBusqueda">
 <div class="migajas">Car model: {{mig}} </div>
 <!-- <p>{{brand_id}}</p> -->
-<input class="filter" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter">    
+<input class="filter" type="text" id="myInput" placeholder="Filter">        
 <table id="invoice">
     <thead>
         <tr class="trsup">
@@ -18,6 +18,7 @@
             <td>Pistons</td>
         </tr>
     </thead>
+    <tbody id="myTable">
     {% for br in brand_id %}
     <tr>   
         <td><a href="">{{br.engine_l}}</a></td>
@@ -27,6 +28,7 @@
         <td><a href="">{{br.engine_pistons}}</a></td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
 </div>
 {% endblock %}

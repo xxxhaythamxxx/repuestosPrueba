@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'Repuestosapp/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
 </head>
 <header>
     <a href="/">KMOTORSHOP.COM</a>
@@ -76,6 +77,7 @@
 
 </div>
     {% load Repuestosapp_extras %}
+
     {% block content %}
     {% endblock %}
     <script src="{% static 'Repuestosapp/script.js' %}"></script>
@@ -85,6 +87,10 @@
     <!-- Para generar PDF con js -->
     <script src="html2pdf.bundle.min.js"></script>
     <script src='https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js'></script>
+
+    <script src="{% static 'Repuestosapp/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </body>

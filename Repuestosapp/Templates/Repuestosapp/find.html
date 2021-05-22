@@ -8,31 +8,19 @@
 {% if spare %}
 <div class="resultadoBusqueda">
 <div class="migajas">Spare code: {{mig}} </div>
-<input class="filter" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter">    
-<h4>Select number of Rows</h4>
-<div class="form-group">
-    <select name="state" id="maxRows" class="form-control" style="width:150px">
-        <option value="5000">Show all</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="75">75</option>
-        <option value="100">100</option>
-    </select>
-</div>
-<table id="invoice" class="table">
+<input class="filter" type="text" id="myInput" placeholder="Filter">    
+
+<table id="invoice" class="invoice">
     <thead>
         <tr class="trsup">
-            <td>Photo</td>
-            <td>Code</td>
-            <td>Brand</td>
-            <td>Type</td>
-            <td>Car</td>
+            <th>Photo</th>
+            <th>Code</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Car</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
     {% for br in spare %}
     <tr>
         <td><a href="{% url 'sparedetails' br.spare_code %}"><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
@@ -44,61 +32,10 @@
     {% endfor %}
     </tbody>
 </table>
-<div class="pagination-container">
-    <nav>
-        <ul class="pagination"></ul>
-    </nav>
-</div>
-<script src="jquery.min.js"></script>
-<script>
-var table="#invoice"
-$("#maxRows").on("change",function(){
-    $(".pagination").html('')
-    var trnum=0
-    var maxRows=parseInt($(this).val())
-    var totalRows=$(table+" tbody tr").length
-    $(table+" tr:gt(0)").each(function(){
-        trnum++
-        if(trnum>maxRows){
-            $(this).hide()
-        }
-        if(trnum<=maxRows){
-            $(this).show()
-        }
-    })
-    if(totalRows>maxRows){
-        var pagenum=Math.ceil(totalRows/maxRows)
-        for(var i=1;i<=pagenum;){
-            $(".pagination").append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
-        }
-    }
-    $('.pagination li:first-child').addClass('active')
-    $('.pagination li').on('click',function(){
-        var pageNum=$(this).attr('data-page')
-        var trIndex=0;
-        $('.pagination li').removeClass('active')
-        $(this).addClass('active')
-        $(table+' tr:gt(0)').each(function(){
-            trIndex++
-            if(trIndex>(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows)){
-                $(this).hide()
-            }else{
-                $(this).show()
-            }
-        })
-    })
-})
-$(function(){
-    $('table tr:eq(0)').prepend('<th>ID</th>')
-    var id=0;
-    $('table tr:gt(0)').each(function(){
-        id++
-        $(this).prepend('<td>'+id+'</td>')
-    })
-})
-</script>
 {% endif %}
 </div>
+
+
 {% endblock %}
 
 

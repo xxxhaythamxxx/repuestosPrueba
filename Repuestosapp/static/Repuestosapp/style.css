@@ -94,6 +94,7 @@ th, td {
     float: left;
     width: 75%;
     padding: 0 20px;
+    padding-bottom: 20px;
 }
 .resultadoBusqueda table {
     margin:auto;
@@ -190,31 +191,32 @@ select {
 }
 
 /* Paginacion ----------------------------------------------------------------------------*/
-.pagination {
+#pag {
     text-align: center;
+    background-color: red;
     margin-top: 20px;
 }
-.pagination a {
+#pag a {
     text-decoration: none;
 }
-.pagination a:hover {
+#nav a:hover {
     text-decoration: none;
 }
-.numpag {
+#nav a {
     background: rgb(206, 59, 59);
     padding: 10px 15px;
     border-radius: 2px;
     /* text-decoration: none; */
 }
-a.numpag {
+#nav a {
     color:white;
 }
-a.pactual {
+#nav .active {
     color: white;
     background: rgb(136,12,12);
     background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
 }
-.numpag:hover {
+#nav a:hover {
     color: white;
     background: rgb(136,12,12);
     background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);

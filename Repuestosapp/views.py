@@ -2,13 +2,10 @@ from django.shortcuts import render, HttpResponse
 from .forms import Formulario, listCars
 from .models import car, spare, engine
 from django.core.paginator import Paginator
-from .filters import spareFilter
 from io import BytesIO
 from django.http import HttpResponse
 from django.views import View
-from xhtml2pdf import pisa
 from django.template.loader import get_template
-from weasyprint import HTML, CSS
 import os
 from django.conf import settings
 from django.contrib.staticfiles import finders
@@ -43,7 +40,8 @@ def selectf(request):   # Código para saber si usa el input o el filtro
                 return False
 
 def prueba(request):
-    return render(request,"Repuestosapp/prueba.html",{"name":"LuisPapito"})
+    com=spare.objects.all()
+    return render(request,"Repuestosapp/prueba.html",{"spare":com})
     # name=request.GET.get("view")
     # print=request.GET.get("print")
     # if name:
@@ -54,7 +52,6 @@ def prueba(request):
     #     else:
     #         return render(request,"Repuestosapp/prueba.html")
     # comp=spare.objects.all().order_by("id")
-    # filter=spareFilter(request.GET,queryset=comp)
     
 
 def home(request):
@@ -122,7 +119,7 @@ def sparedetails(request,val):
 
     if selectf(request)==False:
         pr=spare.objects.filter(spare_code__icontains=val)
-        dic.update({"brand_id":pr,"test":val,"mig":val})
+        dic.update({"brand_id":pr})
         return render(request,"Repuestosapp/sparedetails.html",dic)
     else:
         return selectf(request)
