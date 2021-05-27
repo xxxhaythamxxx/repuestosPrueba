@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from .forms import Formulario, listCars
 from .models import car, spare, engine
 from django.core.paginator import Paginator
@@ -9,6 +9,72 @@ from django.template.loader import get_template
 import os
 from django.conf import settings
 from django.contrib.staticfiles import finders
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from .cart import *
+
+def add2car(request,spare_id):
+    carrito = Cart(request)
+    spare_part = get_object_or_404(spare, id = spare_id)
+    carrito.add(spare_part)
+    print("--------------Carrito-----------------")
+    print(carrito)
+    return render(request,"Repuestosapp/add2car.html",{"carrito":carrito,"spare":spare_part})
+    # return redirect("home")
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+def cart_remove(request, spare_id):
+    carrito = Cart(request)
+    spare_part = get_object_or_404(spare, id = spare_id)
+    carrito.remove(spare_part)
+    return render(request,"Repuestosapp/add2car.html",{"carrito":carrito,"spare":spare_part})
+
+def detail(request):
+    carrito = Cart(request)
+    return render(request, 'Repuestosapp/detail.html', {'carrito': carrito})
+
+def acceder(request):
+    if request.method=="POST":
+        form = AuthenticationForm(request,data=request.POST)
+        if form.is_valid():
+            nombre_usuario = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            usuario = authenticate(username=nombre_usuario,password=password)
+            if usuario is not None:
+                login(request,usuario)
+                messages.success(request,F"Bienvenid@ de nuevo {nombre_usuario}")
+                return redirect("home")
+            else:
+                messages.error(request,"Los datos son incorrectos")
+        else:    
+            messages.error(request,"Los datos son incorrectos")
+
+    form = AuthenticationForm()
+    return render(request,"Repuestosapp/acceder.html",{"form":form})
+
+class VistaRegistro(View):
+    def get(self,request):
+        form = UserCreationForm()
+        return render(request,"Repuestosapp/registro.html",{"form":form})
+
+    def post(self,request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            nombre_usuario = form.cleaned_data.get("username")
+            messages.success(request,F"Bienvenid@ a la plataforma {nombre_usuario}")
+            login(request,usuario)
+            return redirect("home")
+        else:
+            for msg in form.error_messages:
+                messages.error(request,form.error_messages[msg])
+            return render(request,"Repuestosapp/registro.html",{"form":form})
+
+def salir(request):
+    logout(request)
+    messages.success(request,F"Tu sesión se ha cerrado correctamente")
+    return redirect("home")
 
 def same(): # Creo el diccionario para los formularios en común de todos los templates
     formulario_busqueda=Formulario()
@@ -38,10 +104,23 @@ def selectf(request):   # Código para saber si usa el input o el filtro
                 return render(request,"Repuestosapp/find.html",dic)
             else:
                 return False
+# def prueba1(request,val):
+#     val1=request.GET.get("val1")
+#     return (request,"Repuestosapp/prueba1.html")
+
+def prueba1(request):
+    if request.method=="GET":
+        val=request.GET.get("val1")
+        return (request,"Repuestosapp/prueba1.html")
 
 def prueba(request):
-    com=spare.objects.all()
-    return render(request,"Repuestosapp/prueba.html",{"spare":com})
+    if request.method=="GET":
+        val=request.GET.get("val1")
+        if val:
+            print(val)
+            return render(request,"Repuestosapp/prueba1.html")
+        else:
+            return render(request,"Repuestosapp/prueba.html")
     # name=request.GET.get("view")
     # print=request.GET.get("print")
     # if name:

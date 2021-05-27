@@ -11,6 +11,23 @@
 </head>
 <header>
     <a href="/">KMOTORSHOP.COM</a>
+    <ul class="user-ref">
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hola {{user.username}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'salir' %}">Cerrar sesión</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'acceder' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registro' %}">Register</a>
+            </li>
+        {% endif %}
+    </ul>
 </header>
 <body>
 <!-- Buscador genérico -->
@@ -78,6 +95,15 @@
 </div>
     {% load Repuestosapp_extras %}
 
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src="{% static 'Repuestosapp/script.js' %}"></script>

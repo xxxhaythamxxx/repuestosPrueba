@@ -1,0 +1,38 @@
+<h3>Spares</h3>
+{{carrito.cart.spares}}
+
+<h3>carrito</h3>
+{{carrito}}
+<!-- <h3>carrito.spares</h3>
+{{carrito.cart.spares}} -->
+<h3>carrito.cart</h3>
+{{carrito.cart}}
+
+<h3>for carrito.cart</h3>
+{% for car in carrito.cart %}
+    {{car}}   
+{% endfor %}
+
+
+
+<!-- 
+<h3>Sessions</h3>
+{{carrito.items}}
+{{carrito.spare_code}}
+{{carrito.0}}
+{{carrito.session}}
+<h3>Items</h3>
+{{carrito.session.items}}
+<h3>Ciclo for</h3>
+{% for car in carrito.session.items %}
+    {{car}}
+    <h3>Desglose</h3>
+    {{car}}
+    <h3>Ciclo for aninado</h3>
+    {% for c in car %}
+        {{c}}
+    {% endfor %}
+    
+{% endfor %}-->
+<h3>Spare</h3>
+{{spare}} 

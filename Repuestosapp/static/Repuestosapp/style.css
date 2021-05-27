@@ -5,7 +5,7 @@
 }
 
 /* Cabecera ----------------------------------------------------------------------------*/
-header {
+header:not(.user-ref) {
     /* background-color:rgb(196, 18, 18); */
 
     background: rgb(136,12,12);
@@ -15,11 +15,11 @@ header {
     /* padding: 20px 0px; */
     height: 80px;
 }
-header a {
+header a:not(.nav-link) {
     text-decoration: none;
     color:white;
     display: inline-block;
-    /* margin:auto; */
+    margin:auto;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -29,6 +29,21 @@ body {
     /* height: 90%; */
     background-color: silver;
     
+}
+.user-ref {
+    float: right;
+    font-style: normal;
+    font-weight: normal;
+    list-style: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    padding-top: 28px;
+}
+.nav-link {
+    text-decoration: none;
+    color:white;
+    /* padding: auto 10px; */
 }
 
 /* migajas */
