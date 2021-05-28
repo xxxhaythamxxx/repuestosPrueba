@@ -8,26 +8,19 @@
 <div class="migajas">Car manufacturer: {{mig}} </div>
 <!-- <p>{{brand_id}}</p> -->
 <div class="options">
-    <input class="filter" type="text" id="myInput" placeholder="Filter">
+    <!-- <input class="filter" type="text" id="myInput" placeholder="Filter"> -->
 </div>
-<table id="invoice">
-    <thead>
-        <tr class="trsup">
-            <td>Manufacturer</td>
-            <td>Model</td>
-            <td>Transmission</td>
-        </tr>
-    </thead>
-    <tbody id="myTable">
+<div class="conten">
+{% for t in tr %}
+<h3 class="">{{t|stringformat:"s"|truncatewords:1}}</h3>
+    
     {% for br in brand_id %}
-    <tr>
-        <td><a href="{% url 'manuf' br.car_manufacturer %}">{{br.car_manufacturer}}</a></td>
-        <td><a href="{% url 'model' br.car_model %}">{{br.car_model}}</a></td>
-        <td><a href="">{{br.transmission}}</a></td>
-    </tr>
+        {% if t|stringformat:"s"|truncatewords:1 == br.car_model|stringformat:"s"|truncatewords:1 %}
+            <li><a href="">{{br.car_model}}</a></li>
+        {% endif %}
     {% endfor %}
-    </tbody>
-</table>
+{% endfor %}
+</div>
 </div>
 {% endblock %}
 
