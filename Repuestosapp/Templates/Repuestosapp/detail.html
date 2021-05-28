@@ -5,8 +5,12 @@
 {% block content %}
 
 <div class="resultadoBusqueda">
-    <input class="filter" type="text" id="myInput" placeholder="Filter">    
-    
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="options">
+        <input class="filter" type="text" id="myInput" placeholder="Filter">
+        <button value="delete" name="delete" class="toCart" type="submit">Delete</button>
+    </div>
     <table id="invoice" class="invoice">
         <thead>
             <tr class="trsup">
@@ -15,7 +19,7 @@
                 <th>Brand</th>
                 <th>Type</th>
                 <th>Car</th>
-                <th>ID</th>
+                <th><input class="check" type="checkbox" onClick="toggle(this,'toDel')"/></th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -28,24 +32,16 @@
             <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
             <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
             <td><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></td>
-            <td><a href="{% url 'er2car' br.id %}"><button>Delete</button></a></td>
+            <td><input class="check" type="checkbox" name="toDel" value="{{br.id}}"></td>
         </tr>
         {% endif %}
         {% endfor %}
         {% endfor %}
         </tbody>
     </table>
-    <!-- <h3>for car in carrito.cart</h3>
-    {% for car in carrito.cart %}
-        {{car}}   
-    {% endfor %} -->
+</form>
 </div>
 
-
-<h3>Prueba</h3>
-{% for spare in carrito.cart %}
-    {{spare}}
-{% endfor %}
 {% endblock %}
 
 

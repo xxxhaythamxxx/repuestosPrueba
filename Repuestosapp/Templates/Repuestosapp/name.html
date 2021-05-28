@@ -7,15 +7,21 @@
 <div class="resultadoBusqueda">
 <div class="migajas">Spare type: {{mig}} </div>
 <!-- <p>{{brand_id}}</p> -->
-<input class="filter" type="text" id="myInput" placeholder="Filter">        
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="options">
+        <input class="filter" type="text" id="myInput" placeholder="Filter">
+        <button class="toCart" type="submit">Add</button>
+    </div>
 <table id="invoice">
     <thead>
         <tr class="trsup">
-            <td>Photo</td>
-            <td>Code</td>
-            <td>Brand</td>
-            <td>Type</td>
-            <td>Car</td>
+            <th>Photo</th>
+            <th>Code</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Car</th>
+            <th><input class="check" type="checkbox" onClick="toggle(this,'toAdd')"/></th>
         </tr>
     </thead>
     <tbody id="myTable">
@@ -24,13 +30,14 @@
         <td><a href="{% url 'sparedetails' br.spare_code %}"><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
         <td><a href="{% url 'sparedetails' br.spare_code %}">{{br.spare_code}}</a></td>
         <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
-        <!-- <th><a name="brand_id" href="brand?brand_id">{{spares.spare_brand}}</a></th> -->
         <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
         <td><a href="{% url 'manuf' br.car_info__car_manufacturer %}">{{br.car_info__car_manufacturer}}</a></td>
+        <td><input class="check" type="checkbox" name="toAdd" value="{{br.id}}"></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+</form>
 </div>
 {% endblock %}
 

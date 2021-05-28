@@ -15,11 +15,18 @@ from django.contrib.auth import login, logout, authenticate
 from .cart import *
 
 def add2car(request,spare_id):
-    carrito = Cart(request)
-    spare_part = get_object_or_404(spare, id = spare_id)
-    carrito.add(spare_part)
-    # return redirect("home")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+    if request.method=="POST":
+        print("Está enviando POST-----------------------------------")
+        list = request.POST.getlist('toAdd')
+        print(list)
+        # return render(request,"Repuestosapp/detail.html")
+
+        carrito = Cart(request)
+        spare_part = get_object_or_404(spare, id = spare_id)
+        carrito.add(spare_part)
+        # return redirect("home")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def er2car(request, spare_id):
     carrito = Cart(request)
@@ -29,6 +36,7 @@ def er2car(request, spare_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def detail(request):
+
     if selectf(request)==False:
         spares = spare.objects.all()
         carrito = Cart(request)
@@ -84,12 +92,31 @@ def same(): # Creo el diccionario para los formularios en común de todos los te
     allEngines=engine.objects.all()# Consigo TODOS los motores
     onlyManufCars=car.objects.all().values("car_manufacturer").distinct()# Conseguir TODOS los carros por fabricante
     allCars=car.objects.all()# Conseguir TODOS los carros
-    dicc={"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines}
+    allSpares=spare.objects.values("spare_name").order_by("spare_name").distinct()# Conseguir TODOS los repuestos
+    dicc={"formulariop":formulario_busqueda,"allCars":allCars,"onlyManufCars":onlyManufCars,"allEngines":allEngines,"allSpares":allSpares}
     return dicc
 
 dic=same().copy()
 
 def selectf(request):   # Código para saber si usa el input o el filtro
+
+    if request.method=="POST":
+        list = request.POST.getlist('toAdd')
+        delist = request.POST.getlist("toDel")
+        if delist:
+            carrito = Cart(request)
+            for a in delist:                
+                spare_part = get_object_or_404(spare, id = a)
+                carrito.remove(spare_part)
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if list:
+            carrito = Cart(request)
+            for a in list:                
+                spare_part = get_object_or_404(spare, id = a)
+                carrito.add(spare_part)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        # return render(request,"Repuestosapp/detail.html")
+
     if request.method=="GET":
         search=request.GET.get("engine_id")
         if search:    # Si usaron el filter
@@ -97,7 +124,8 @@ def selectf(request):   # Código para saber si usa el input o el filtro
             carManu=request.GET.get("car_id")           # Valor del carro enviado
             carModel=request.GET.get("car_model_id")    #Valor del modelo del carro enviado
             comp=spare.objects.filter(engine_info__engine_ide__icontains=engModel,car_info__car_manufacturer__icontains=carManu,car_info__car_model__icontains=carModel).order_by("id")  # Creo un Query de spare que tenga el valor del motor pasado
-            dic.update({"spare":comp,"mig":engModel})
+            engcomp=engine.objects.filter(engine_ide__icontains=engModel,car_engine_info__car_manufacturer__icontains=carManu)
+            dic.update({"spare":comp,"mig":engModel,"engcomp":engcomp})
             return render(request,"Repuestosapp/findfil.html",dic)
         else:   # Si se usa el buscador por código de repuesto
             valor=request.GET.get("search")
@@ -138,8 +166,23 @@ def prueba(request):
 
 def home(request):
 
+    if request.method=="POST":
+        list = request.POST.getlist('toAdd')
+        delist = request.POST.getlist("toDel")
+        if delist:
+            carrito = Cart(request)
+            for a in delist:                
+                spare_part = get_object_or_404(spare, id = a)
+                carrito.remove(spare_part)
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if list:
+            carrito = Cart(request)
+            for a in list:                
+                spare_part = get_object_or_404(spare, id = a)
+                carrito.add(spare_part)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
     if request.method=="GET":
-        print("Entra a home")
 
         if selectf(request)==False:
             return render(request,"Repuestosapp/home.html",same())
@@ -155,7 +198,7 @@ def findfil(request):
 def brand(request,val):
 
     if selectf(request)==False:
-        pr=spare.objects.values("spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_brand__icontains=val).distinct()
+        pr=spare.objects.values("id","spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_brand__icontains=val).distinct()
         dic.update({"brand_id":pr,"mig":val})
         return render(request,"Repuestosapp/brand.html",dic)
     else:
@@ -164,7 +207,7 @@ def brand(request,val):
 def name(request,val):
 
     if selectf(request)==False:
-        pr=spare.objects.values("spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_name__icontains=val).distinct()
+        pr=spare.objects.values("id","spare_photo","spare_code","spare_brand","spare_name","car_info__car_manufacturer").filter(spare_name__icontains=val).distinct()
         dic.update({"brand_id":pr,"mig":val})
         return render(request,"Repuestosapp/name.html",dic)
     else:

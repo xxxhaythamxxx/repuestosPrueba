@@ -49,6 +49,7 @@ body {
 /* migajas */
 .migajas {
     background: rgb(206, 59, 59);
+    font-size: large;
     color:white;
     padding: 10px;
     margin: 10px 0 auto;
@@ -71,12 +72,12 @@ h1 {
     color:white;
     /* margin-top: 20px; */
 }
-form input {
+form input:not(.check):not(.filter) {
     border-radius: 20px;
     padding: 5px 10px;
     width: 400px;
 }
-button {
+.contform button:not(.filter) {
     margin: 20px 0;
     padding: 5px 10px;
     border-radius: 5px;
@@ -90,7 +91,7 @@ button {
     color: white;
     
 }
-table, th, td {
+table:not(.filter), th:not(.filter), td:not(.filter) {
     border: 1px solid transparent;
     border-radius: 5px;
 }
@@ -133,11 +134,17 @@ th, td {
 }
 
 /* Filtrador ----------------------------------------------------------------------------*/
+aside button {
+    margin: 20px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
 .lateral {
     width: 20%;
     float: left;
 }
-aside, .filterExtra {
+aside:not(.filter), .filterExtra:not(.filter) {
     background: rgb(136,12,12);
     background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
     float: left;
@@ -158,7 +165,7 @@ aside label, .filterExtra label {
     padding: 0 15px;
     text-align: center;
 }
-select {
+select:not(.filter) {
     width: 100%;
     margin: 10px 0;
     padding: 5px;
@@ -169,6 +176,21 @@ select {
 }
 .filterExtra {
     width: 100%;
+}
+.PDFoptions li {
+    color: whitesmoke;
+    list-style: none;
+    padding: 5px 0;
+}
+.PDFoptions li a {
+    color: whitesmoke;
+    text-decoration: none;
+
+}
+.PDFoptions button {
+    margin: 20px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 /* Spare Details ----------------------------------------------------------------------------*/
@@ -217,7 +239,7 @@ select {
 #nav a:hover {
     text-decoration: none;
 }
-#nav a {
+#nav a:not(.filter) {
     background: rgb(206, 59, 59);
     padding: 10px 15px;
     border-radius: 2px;
@@ -248,6 +270,16 @@ select {
 
 /* filtro ----------------------------------------------------------------------------*/
 .filter {
-    padding: 5px;
-    margin: 10px auto;
+    padding: 5px 10px;
+    margin: auto;
+}
+.toCart {
+    float: right;
+}
+.options {
+    margin: 10px 0;
+}
+.options button {
+    padding: 5px 10px;
+    border-radius: 5px;
 }

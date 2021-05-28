@@ -7,11 +7,16 @@
 {% load Repuestosapp_extras %}
 
 <div class="resultadoBusqueda">
-<div class="migajas">Car manufacturer: {{spare.0.car_info.all.0.car_manufacturer}} - Car model: {{spare.0.car_info.all.0.car_model}} - Engine: {{mig}}</div>
+<div class="migajas">Car manufacturer: {{spare.0.car_info.all.0.car_manufacturer}} - Car model: {{spare.0.car_info.all.0.car_model}} - Engine: {{engcomp.0}}</div>
 
 <!-- <p>{{brand_id}}</p> -->
 {% if spare %}
-<input class="filter" type="text" id="myInput" placeholder="Filter">        
+<form method="POST" action="">
+{% csrf_token %}
+<div class="options">
+    <input class="filter" type="text" id="myInput" placeholder="Filter">
+    <button class="toCart" type="submit">Add</button>
+</div>
 <table class="" id="invoice">
     <thead>
         <tr class="trsup">
@@ -20,6 +25,7 @@
             <td>Brand</td>
             <td>Type</td>
             <td>Car</td>
+            <th><input class="check" type="checkbox" onClick="toggle(this,'toAdd')"/></th>
         </tr>
     </thead>
     <tbody id="myTable">
@@ -30,12 +36,23 @@
         <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
         <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
         <td><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></td>
+        <td><input class="check" type="checkbox" name="toAdd" value="{{br.id}}"></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+</form>
 {% endif %}
 </div>
+<script>
+function toggle(source,toAdd) {
+    checkboxes = document.getElementsByName(toAdd);
+    for (var i = 0,
+        n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+</script>
 {% endblock %}
 
 

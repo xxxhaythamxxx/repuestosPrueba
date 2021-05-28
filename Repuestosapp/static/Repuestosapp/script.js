@@ -211,6 +211,24 @@ function viewPDF(){
       });
 }
 
+// Función para que los checkboxes se seleccionen todos
+
+function toggle(source,toAdd) {
+    checkboxes = document.getElementsByName(toAdd);
+    for (var i = 0,
+        n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function toggle(source,toDel) {
+    checkboxes = document.getElementsByName(toDel);
+    for (var i = 0,
+        n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
 // Intento de paginacion
 
 /*

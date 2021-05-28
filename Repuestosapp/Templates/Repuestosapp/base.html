@@ -36,7 +36,7 @@
 <!-- Buscador genérico -->
     <div class="contform">
         <h1>Spare parts finder</h1>
-        <form action="" method="GET">
+        <form class="searcher" action="" method="GET">
             <!-- {% csrf_token %} -->
             <div class="maintable">{{formulariop.as_table}}</div>
             <button type="submit" value="enviar">Buscar</button>
@@ -84,7 +84,15 @@
     <button type="submit" value="filtrar">Buscar</button>
     </form>       
 </aside>
-
+<div class="filterExtra">
+    <label for="">Spare types:</label>
+        <div class="PDFoptions">
+            {% for a in allSpares %}
+                <li><a href="{% url 'name' a.spare_name %}">{{a.spare_name}}</a></li>
+                <hr color="rgba(136,12,12,1)">
+            {% endfor %}
+        </div> 
+    </div>
 {% if spare or brand_id or carrito.cart %}
 <div class="filterExtra">
 <label for="">Table options:</label>
@@ -109,7 +117,7 @@
     {% endif %}
     {% block content %}
     {% endblock %}
-    <script src="{% static 'Repuestosapp/script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Repuestosapp/script.js' %}"></script>
     <!-- Para que trabaje el paginado -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
