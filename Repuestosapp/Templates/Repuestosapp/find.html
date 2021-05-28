@@ -18,7 +18,7 @@
             <th>Brand</th>
             <th>Type</th>
             <th>Car</th>
-            <th>ID</th>
+            <th>Op</th>
         </tr>
     </thead>
     <tbody id="myTable">
@@ -29,7 +29,7 @@
         <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
         <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
         <td><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></td>
-        <td><a href="{% url 'add2car' br.id %}">{{br.id}}</a></td>
+        <td><a href="{% url 'add2car' br.id %}"><button>Add</button></a></td>
     </tr>
     {% endfor %}
     </tbody>

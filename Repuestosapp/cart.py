@@ -1,6 +1,7 @@
 from .models import *
 # from Repuestosapp.models import spare
 from django.conf import settings
+from django.contrib import messages
 
 class Cart:
     def __init__(self,request):
@@ -15,6 +16,7 @@ class Cart:
         if str(spare.id) not in self.cart.keys():
             spare_id = str(spare.id)
             self.cart[spare_id] = {
+                "spare_photo": spare.spare_photo.url,
                 "spare_code": spare.spare_code,
                 "spare_brand": spare.spare_brand,
                 "spare_name": spare.spare_name,
@@ -45,5 +47,5 @@ class Cart:
         spares = spare.objects.filter(id__in = spare_ids)
         cart = self.cart.copy()
         for sp in spares:
-            self.cart[str(sp.id)]["sp"] = sp
+            self.cart[str(sp.id)]["spare"] = sp
         

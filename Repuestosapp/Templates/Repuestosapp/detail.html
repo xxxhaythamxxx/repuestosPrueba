@@ -1,8 +1,54 @@
+{% extends "Repuestosapp/base.html" %}
 
-{{carrito}}
-<h3>carrito.cart</h3>
-{{carrito.cart}}
-<h3>for car in carrito.cart</h3>
-{% for car in carrito.cart %}
-    {{car}}   
+{% block title %} Kmotorshop {% endblock %}
+
+{% block content %}
+
+<div class="resultadoBusqueda">
+    <input class="filter" type="text" id="myInput" placeholder="Filter">    
+    
+    <table id="invoice" class="invoice">
+        <thead>
+            <tr class="trsup">
+                <th>Photo</th>
+                <th>Code</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Car</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+        {% for car in carrito.cart %}
+        {% for br in spare %}
+        {% if car|add:"0" == br.id|add:"0" %}
+        <tr>
+            <td><a href="{% url 'sparedetails' br.spare_code %}"><div style="background-image: url('/media/{{br.spare_photo}}');" class="photo"></div></a></div></td>
+            <td><a href="{% url 'sparedetails' br.spare_code %}">{{br.spare_code}}</a></td>
+            <td><a href="{% url 'brand' br.spare_brand %}">{{br.spare_brand}}</a></td>
+            <td><a href="{% url 'name' br.spare_name %}">{{br.spare_name}}</a></td>
+            <td><a href="{% url 'manuf' br.car_info.all.0.car_manufacturer %}">{{br.car_info.all.0.car_manufacturer}}</a></td>
+            <td><a href="{% url 'er2car' br.id %}"><button>Delete</button></a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <!-- <h3>for car in carrito.cart</h3>
+    {% for car in carrito.cart %}
+        {{car}}   
+    {% endfor %} -->
+</div>
+
+
+<h3>Prueba</h3>
+{% for spare in carrito.cart %}
+    {{spare}}
 {% endfor %}
+{% endblock %}
+
+
+
+
+

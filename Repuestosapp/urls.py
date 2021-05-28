@@ -23,6 +23,7 @@ urlpatterns = [
     path('salir',views.salir,name='salir'),
     path('acceder',views.acceder,name='acceder'),
     path('add2car/<str:spare_id>',views.add2car,name='add2car'),
+    path('er2car/<str:spare_id>',views.er2car,name='er2car'),
     path('detail',views.detail,name='detail'),
 
 ]

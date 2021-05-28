@@ -12,7 +12,7 @@
 <header>
     <a href="/">KMOTORSHOP.COM</a>
     <ul class="user-ref">
-        {% if user.is_authenticated %}
+        <!-- {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="#">Hola {{user.username}}</a>
             </li>
@@ -26,7 +26,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'registro' %}">Register</a>
             </li>
-        {% endif %}
+        {% endif %} -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'detail' %}">Cart</a>
+            </li>
     </ul>
 </header>
 <body>
@@ -82,7 +85,7 @@
     </form>       
 </aside>
 
-{% if spare or brand_id %}
+{% if spare or brand_id or carrito.cart %}
 <div class="filterExtra">
 <label for="">Table options:</label>
     <div class="PDFoptions">

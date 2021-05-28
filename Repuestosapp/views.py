@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render, HttpResponse, HttpResponseRedirect
 from .forms import Formulario, listCars
 from .models import car, spare, engine
 from django.core.paginator import Paginator
@@ -18,21 +18,24 @@ def add2car(request,spare_id):
     carrito = Cart(request)
     spare_part = get_object_or_404(spare, id = spare_id)
     carrito.add(spare_part)
-    print("--------------Carrito-----------------")
-    print(carrito)
-    return render(request,"Repuestosapp/add2car.html",{"carrito":carrito,"spare":spare_part})
     # return redirect("home")
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
-def cart_remove(request, spare_id):
+def er2car(request, spare_id):
     carrito = Cart(request)
     spare_part = get_object_or_404(spare, id = spare_id)
     carrito.remove(spare_part)
-    return render(request,"Repuestosapp/add2car.html",{"carrito":carrito,"spare":spare_part})
+    # return render(request,"Repuestosapp/detail.html",{"carrito":carrito,"spare":spare_part})
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 def detail(request):
-    carrito = Cart(request)
-    return render(request, 'Repuestosapp/detail.html', {'carrito': carrito})
+    if selectf(request)==False:
+        spares = spare.objects.all()
+        carrito = Cart(request)
+        dic.update({'carrito': carrito,'spare':spares})
+        return render(request, 'Repuestosapp/detail.html', dic)
+    else:
+        return selectf(request)
 
 def acceder(request):
     if request.method=="POST":
