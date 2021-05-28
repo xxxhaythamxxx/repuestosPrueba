@@ -10,6 +10,7 @@
 <div class="options">
     <input class="filter" type="text" id="myInput" placeholder="Filter">
 </div>
+<a style="padding: 5px;display: inline-block;" href="">All spares for {{mig}}</a>
 <table id="invoice">
     <thead>
         <tr class="trsup">
@@ -18,6 +19,7 @@
             <td>Type</td>
             <td>Cylinder</td>
             <td>Pistons</td>
+            <td>Power</td>
         </tr>
     </thead>
     <tbody id="myTable">
@@ -26,8 +28,9 @@
         <td><a href="">{{br.engine_l}}</a></td>
         <td><a href="{% url 'engine' br.engine_ide %}">{{br.engine_ide}}</a></td>
         <td><a href="">{{br.engine_type}}</a></td>
-        <td><a href="">{{br.engine_cylinder}}</a></td>
+        <td><a href="">{{br.engine_cylinder}} ccm</a></td>
         <td><a href="">{{br.engine_pistons}}</a></td>
+        <td><a href="">{{br.engine_power_kw}}Kw / {{br.engine_power_hp}}hp</a></td>
     </tr>
     {% endfor %}
     </tbody>

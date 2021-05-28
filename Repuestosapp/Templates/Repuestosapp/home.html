@@ -4,8 +4,15 @@
 
 {% block content %}
 
-    <div class="resultadoBusqueda">
-
+<div class="resultadoBusqueda">
+<div class="conten" style="margin-top: 10px;">
+    <h3>Car brands</h3>
+    <div class="conteni">
+    {% for car in manu %}
+        <li><a href="{% url 'manuf' car %}">{{car}}</a></li>
+    {% endfor %}
     </div>
+</div>
+</div>
 
 {% endblock %}

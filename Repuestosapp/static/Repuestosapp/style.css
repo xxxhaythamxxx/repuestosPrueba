@@ -143,6 +143,7 @@ aside button {
 .lateral {
     width: 20%;
     float: left;
+    font-family: Arial, Helvetica, sans-serif;
 }
 aside:not(.filter), .filterExtra:not(.filter) {
     background: rgb(136,12,12);
@@ -282,4 +283,28 @@ select:not(.filter) {
 .options button {
     padding: 5px 10px;
     border-radius: 5px;
+}
+
+/* Muestra las listas ------------------------------------------------------------------- */
+.conten h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    padding: 10px;
+    padding-left: 10px;
+    color:whitesmoke;
+    background: rgb(136,12,12);
+    background: linear-gradient(0deg, rgba(136,12,12,1) 0%, rgba(196,18,18,1) 83%);
+}
+.conten li {
+    list-style: none;
+    padding:5px;
+}
+.conten li a {
+    text-decoration: none;
+}
+.conteni {
+    padding: 10px;
+}
+.conteni li a{
+    pass
 }

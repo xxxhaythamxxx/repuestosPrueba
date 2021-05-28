@@ -85,7 +85,7 @@
     </form>       
 </aside>
 <div class="filterExtra">
-    <label for="">Spare types:</label>
+    <label for="">Category:</label>
         <div class="PDFoptions">
             {% for a in allSpares %}
                 <li><a href="{% url 'name' a.spare_name %}">{{a.spare_name}}</a></li>

@@ -98,6 +98,15 @@ def same(): # Creo el diccionario para los formularios en común de todos los te
 
 dic=same().copy()
 
+def trunc(val):
+    allen = car.objects.filter(car_manufacturer__icontains=val).values("car_model").order_by("car_model")
+    b=[]
+    for a in allen:
+        a = a["car_model"].split(" ")[0]
+        b.append(a+" .")
+    b = list(set(b)) 
+    return b
+
 def selectf(request):   # Código para saber si usa el input o el filtro
 
     if request.method=="POST":
@@ -185,7 +194,14 @@ def home(request):
     if request.method=="GET":
 
         if selectf(request)==False:
-            return render(request,"Repuestosapp/home.html",same())
+            b = []
+            a = car.objects.all().values("car_manufacturer").order_by("car_manufacturer")
+            for v in a:
+                v = v["car_manufacturer"]
+                b.append(v)
+            b = (set(b))
+            dic.update({"manu":b})
+            return render(request,"Repuestosapp/home.html",dic)
         else:
             return selectf(request)
 
@@ -216,8 +232,9 @@ def name(request,val):
 def manuf(request,val):
 
     if selectf(request)==False:
+        tr = trunc(val)
         pr=car.objects.filter(car_manufacturer__icontains=val)
-        dic.update({"brand_id":pr,"mig":val})
+        dic.update({"brand_id":pr,"mig":val,"tr":tr})
         return render(request,"Repuestosapp/manuf.html",dic)
     else:
         return selectf(request)
