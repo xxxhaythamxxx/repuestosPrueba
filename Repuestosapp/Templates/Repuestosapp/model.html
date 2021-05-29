@@ -10,7 +10,7 @@
 <div class="options">
     <input class="filter" type="text" id="myInput" placeholder="Filter">
 </div>
-<a style="padding: 5px;display: inline-block;" href="">All spares for {{mig}}</a>
+<a href="{% url 'allmodel' mig %}" style="padding: 5px;display: inline-block;" href="">All spares for {{mig}}</a>
 <table id="invoice">
     <thead>
         <tr class="trsup">

@@ -171,7 +171,23 @@ def prueba(request):
     #     else:
     #         return render(request,"Repuestosapp/prueba.html")
     # comp=spare.objects.all().order_by("id")
+
+def allmodel(request,val):
+    if selectf(request)==False:
+        rep = spare.objects.filter(car_info__car_model__icontains=val).distinct()
+        dic.update({"spare":rep,"mig":val})
+        return render(request,"Repuestosapp/allmodel.html",dic)
+    else:
+        return selectf(request)
+
+def allmanu(request,val):
     
+    if selectf(request)==False:
+        rep = spare.objects.filter(car_info__car_manufacturer__icontains=val).distinct()
+        dic.update({"spare":rep,"mig":val})
+        return render(request,"Repuestosapp/allmanu.html",dic)
+    else:
+        return selectf(request)
 
 def home(request):
 

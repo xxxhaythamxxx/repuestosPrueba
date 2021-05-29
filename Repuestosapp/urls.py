@@ -25,6 +25,8 @@ urlpatterns = [
     path('add2car/<str:spare_id>',views.add2car,name='add2car'),
     path('er2car/<str:spare_id>',views.er2car,name='er2car'),
     path('detail',views.detail,name='detail'),
+    path('allmanu/<str:val>',views.allmanu,name='allmanu'),
+    path('allmodel/<str:val>',views.allmodel,name='allmodel'),
 
 ]
 

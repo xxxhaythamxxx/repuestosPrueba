@@ -11,7 +11,7 @@
     <!-- <input class="filter" type="text" id="myInput" placeholder="Filter"> -->
 </div>
 <div class="conten">
-<li><a href="">All spares for {{mig}}</a></li>
+<li><a href="{% url 'allmanu' mig %}">All spares for {{mig}}</a></li>
 {% for t in tr %}
 <h3 class="">{{t|stringformat:"s"|truncatewords:1}}</h3>
     
