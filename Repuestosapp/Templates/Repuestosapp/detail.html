@@ -9,6 +9,7 @@
     {% csrf_token %}
     <div class="options">
         <input class="filter" type="text" id="myInput" placeholder="Filter">
+        <button id="default">Default</button>
         <button value="delete" name="delete" class="toCart" type="submit">Delete</button>
     </div>
     <table id="invoice" class="invoice">
@@ -42,7 +43,14 @@
 </form>
 </div>
 <script>
+document.getElementById("default").addEventListener("click",function(){
+    $('#invoice tr > *:nth-child(6)').show();
+    $('#invoice tr > *:nth-child(1)').show();
+})
+
 document.getElementById("downloadexcel").addEventListener("click",function(){
+    $('#invoice tr > *:nth-child(6)').hide();
+    $('#invoice tr > *:nth-child(1)').hide();
     var table2excel = new Table2Excel();
     table2excel.export(document.querySelectorAll("#invoice"));
 })
