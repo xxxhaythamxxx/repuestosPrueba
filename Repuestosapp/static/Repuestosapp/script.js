@@ -176,6 +176,7 @@ $(document).ready(function(){
 // Generar PDF desde HTML
 function generatePDF(){
     const element = document.getElementById("invoice");
+    $('#invoice tr > *:nth-child(6)').hide();
     var opt = {
         margin:       1,
         filename:     'report.pdf',
@@ -193,6 +194,7 @@ function generatePDF(){
 
 function viewPDF(){
     const element = document.getElementById("invoice");
+    $('#invoice tr > *:nth-child(6)').hide();
     var opt = {
         margin:       1,
         filename:     'report.pdf',
@@ -243,11 +245,6 @@ function toggle(source,toDel) {
 //     }
 //   })()
 
-// Para pasar a XLSX y pasa sin links
-document.getElementById("downloadexcel").addEventListener("click",function(){
-    var table2excel = new Table2Excel();
-    table2excel.export(document.querySelectorAll("#invoice"));
-})
 
 // Intento de paginacion
 
@@ -422,3 +419,16 @@ $(function(){
 //     })
 // })
 
+
+// Boton defaul para que reinicie la tabla
+document.getElementById("default").addEventListener("click",function(){
+    $('#invoice tr > *:nth-child(6)').show();
+    $('#invoice tr > *:nth-child(1)').show();
+})
+// boton para exportar a Excel
+document.getElementById("downloadexcel").addEventListener("click",function(){
+    $('#invoice tr > *:nth-child(6)').hide();
+    $('#invoice tr > *:nth-child(1)').hide();
+    var table2excel = new Table2Excel();
+    table2excel.export(document.querySelectorAll("#invoice"));
+})
